@@ -1,0 +1,36 @@
+<h3>Mi Agenda Electronica</h3>
+
+<br>
+<button [routerLink] ="['/persona-agregar']" class="btn btn-primary">Agregar Contacto</button>
+
+<hr>
+<div class="table-responsive">
+    <table class="table" >
+        <thead class="table-dark">
+            <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Telefono</th>
+            <th>Celular</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!(ListadoPersonas && ListadoPersonas.length)">
+                <td>No existe registro para mostrar</td>
+            </tr>
+            <tr *ngFor="let persona of ListadoPersonas">
+                <td>{{persona.nombre}}</td>
+                <td>{{persona.apellido}}</td>
+                <td>{{persona.telefono}}</td>
+                <td>{{persona.celular}}</td>
+                <td>{{persona.correo}}</td>
+                <td>
+                    <button class="btn btn-primary" [routerLink]="['/persona-editar/' + persona.id]" >Editar</button>
+                    <button class="btn btn-danger" (click)="delete(persona)">Borrar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

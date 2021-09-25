@@ -1,0 +1,68 @@
+<div class="card mb-3">
+    <h5 class="card-header text-white bg-success">{{edicion ?  'Editar': 'Registrar' }} Contacto</h5>
+    <div class="card-body">
+        <form class="form-horizontal" novalidate [formGroup]="formGroup" (ngSubmit)="save()">
+            <fieldset>
+                <div class="form-group" [ngClass]="{'has-error': (formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && !formGroup.get('nombre').valid }">
+                    <label class="col-md-2 control-label" for="nombreId">Nombre</label>
+                    <div class="col-md-8">
+                        <input class="form-control" [ngClass]="{'is-invalid': (formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && !formGroup.get('nombre').valid, 'is-valid': formGroup.get('nombre').touched && formGroup.get('nombre').valid }" id="nombreId" type="text" placeholder="Nombre" formControlName="nombre" required />
+                        <span class="help-block" *ngIf="(formGroup.get('nombre').touched || formGroup.get('nombre').dirty) && formGroup.get('nombre').errors">
+                            <span class="text-danger" *ngIf="formGroup.get('nombre').errors.required">
+                                El campo nombre es requerido
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error':(formGroup.get('apellido').touched || formGroup.get('apellido').dirty) && !formGroup.get('apellido').valid }">
+                    <label class="col-md-2 control-label" for="apellidoId">Apellido</label>
+                    <div class="col-md-8">
+                        <input class="form-control" [ngClass]="{'is-invalid': (formGroup.get('apellido').touched || formGroup.get('apellido').dirty) && !formGroup.get('apellido').valid, 'is-valid' : formGroup.get('apellido').touched && formGroup.get('apellido').valid }" id="apellidoId" type="text" placeholder="Apellido" formControlName="apellido" required />
+                        <span class="help-block" *ngIf="(formGroup.get('apellido').touched || formGroup.get('apellido').dirty) && formGroup.get('apellido').errors">
+                            <span class="text-danger" *ngIf="formGroup.get('apellido').errors.required">
+                                El campo apellido es requerido
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error': (formGroup.get('telefono').touched && formGroup.get('telefono').dirty) && !formGroup.get('telefono').valid }">
+                    <label class="col-md-2 control-label" for="telefonoId">Telefono</label>
+                    <div class="col-md-8">
+                        <input class="form-control" [ngClass]="{'is-invalid': (formGroup.get('telefono').touched || formGroup.get('telefono').dirty) && !formGroup.get('telefono').valid, 'is-valid' : formGroup.get('telefono').touched && formGroup.get('telefono').valid }" id="telefonoId" type="text" placeholder="014323323" formControlName="telefono" required />
+                        <span class="help-block" *ngIf="(formGroup.get('telefono').touched || formGroup.get('telefono').dirty) && formGroup.get('telefono').errors">
+                            <span class="text-danger" *ngIf="formGroup.get('telefono').errors.required"> El campo telefono es requerido </span>
+                            <span class="text-danger" *ngIf="formGroup.get('telefono').hasError('maxlength')"> Maximo 10 caracteres </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error': (formGroup.get('celular').touched || formGroup.get('celular').dirty) && !formGroup.get('celular').valid }">
+                    <label class="col-md-2 control-label" for="celularId">Celular</label>
+                    <div class="col-md-8">
+                        <input class="form-control" [ngClass]="{'is-invalid': (formGroup.get('celular').touched || formGroup.get('celular').dirty) && !formGroup.get('celular').valid, 'is-valid' : formGroup.get('celular').touched && formGroup.get('celular').valid }" id="celularId" type="text" placeholder="+51988675236" formControlName="celular" required />
+                        <span class="help-block" *ngIf="(formGroup.get('celular').touched || formGroup.get('celular').dirty) && formGroup.get('celular').errors">
+                            <span class="text-danger" *ngIf="formGroup.get('celular').hasError('required')"> El campo celular es requerido </span>
+                            <span class="text-danger" *ngIf="formGroup.get('celular').hasError('maxlength')"> Maximo 10 caracteres  </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" [ngClass]="{'has-error': (formGroup.get('correo').touched || formGroup.get('correo').dirty) && !formGroup.get('correo').valid } ">
+                    <label class="col-md-2 control-label" for="correoId">Correo</label>
+                    <div class="col-md-8">
+                        <input class="form-control" [ngClass]="{'is-invalid': (formGroup.get('correo').touched || formGroup.get('correo').dirty) && !formGroup.get('correo').valid, 'is-valid' : formGroup.get('correo').touched && formGroup.get('correo').valid }" id="correoId" type="email" placeholder="correo@email.com" formControlName="correo" required />
+                        <span class="help-block" *ngIf="(formGroup.get('correo').touched || formGroup.get('correo').dirty) && formGroup.get('correo').errors">
+                            <span class="text-danger" *ngIf="formGroup.get('correo').hasError('required')"> El campo correo es requerido </span>
+                            <span class="text-danger" *ngIf="formGroup.get('correo').hasError('email')"> El correo tiene formato invalido </span>
+                        </span>
+                    </div>
+                </div>
+
+                <button class="btn btn-success m-3" type="submit" [disabled]="!formGroup.valid">
+                    {{edicion ? 'Editar': 'Registrar'}} Contacto
+                </button>
+                <button class="btn btn-danger" type="button" [routerLink]='["/personas"]'>
+                    Cancelar
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</div>
